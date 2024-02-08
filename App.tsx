@@ -1,11 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { MainMenu } from "./screens/MainMenu";
+import React from 'react';
 
 export default function App() {
+
+  const [shows, setShows] = React.useState<slideShow[]>([]);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <MainMenu slideShows= {shows} setShows={setShows}/>
     </View>
   );
 }
