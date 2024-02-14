@@ -1,4 +1,4 @@
-import {View, StyleSheet, Image, Button, TouchableOpacity, Text} from "react-native";
+import {View, StyleSheet, Image, Button, TouchableOpacity, Text, Alert} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Header } from "../components/header";
@@ -91,6 +91,7 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
         {imgIndex == images.length - 1 ?
           <TouchableOpacity
             onPress={() => {
+              if (imgURI == "") Alert.alert("Tyhjä kuva", "Valitse aijempi kuva ennen uuden lisäämistä.")
               setImages(i => [...i, {imageURI: "", duration: 5}]);
               setImgIndex(i => i + 1);
             }}
