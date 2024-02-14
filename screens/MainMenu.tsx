@@ -2,6 +2,7 @@ import { View, StyleSheet, ScrollView, Button } from "react-native";
 import React from "react";
 import { Header } from "../components/header";
 import { NewShowPopup } from "../components/newShowPopup";
+import { SlideShowButton } from "../components/slideShowButton";
 
 interface props {
   slideShows: slideShow[];
@@ -16,13 +17,13 @@ export const MainMenu: (props: props) => React.JSX.Element = ({slideShows, setSh
     <Header/>
 
     <ScrollView style= {styles.scroll}>
-      {slideShows.map(show => <Button title={show.name} onPress={() => console.log(show.name)} key={show.name}/>)}
+      {slideShows.map(show => <SlideShowButton setShows={setShows} slideShow={show} key={show.name}/>)}
     </ScrollView>
 
     <View style = {styles.fixedArea}>
       <Button title="Uusi kuvasarja" onPress={() => showPopup(true)}/>
     </View>
-    
+
     <NewShowPopup visible={popupShown} slideShows={slideShows} setShows={setShows} showPopup={showPopup}/>
   </View>
 };
@@ -41,5 +42,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flex: 1,
+    width: "80%",
+    alignSelf: "center",
   },
 });
