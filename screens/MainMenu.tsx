@@ -19,7 +19,10 @@ export const MainMenu: (props: props) => React.JSX.Element = ({slideShows, setSh
     <Header/>
 
     <ScrollView style= {styles.scroll}>
-      {slideShows.map(show => <SlideShowButton setShows={setShows} slideShow={show} key={show.name} onEdit={() => {
+      {slideShows.map(show => <SlideShowButton onSelect={() => {
+        setActiveShow(show);
+        setRoute("PLAYBACK");
+      }} setShows={setShows} slideShow={show} key={show.name} onEdit={() => {
         setRoute("EDIT");
         setActiveShow(show);
       }}/>)}

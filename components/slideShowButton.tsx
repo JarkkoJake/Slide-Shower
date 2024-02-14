@@ -4,12 +4,13 @@ interface props {
   slideShow: slideShow;
   setShows: React.Dispatch<React.SetStateAction<slideShow[]>>;
   onEdit: () => void;
+  onSelect: () => void;
 };
 
-export const SlideShowButton = ({slideShow, setShows, onEdit}: props) => {
+export const SlideShowButton = ({slideShow, setShows, onEdit, onSelect}: props) => {
   return <View style={styles.wrap}>
 
-    <TouchableOpacity onPress={() => console.log(slideShow.name)} style={styles.textContainer}>
+    <TouchableOpacity onPress={onSelect} style={styles.textContainer}>
       <Text style={styles.text}>{slideShow.name}</Text>
     </TouchableOpacity>
 

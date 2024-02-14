@@ -8,4 +8,4 @@ interface slideShow {
   images: slideImage[];
 };
 
-type route = "MAIN" | "EDIT";
+type route = "MAIN" | "EDIT" | "PLAYBACK";
