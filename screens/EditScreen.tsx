@@ -1,4 +1,4 @@
-import {View, StyleSheet, Image, Button} from "react-native";
+import {View, StyleSheet, Image, Button, TouchableOpacity} from "react-native";
 import React from "react";
 import { Header } from "../components/header";
 
@@ -7,14 +7,25 @@ interface props {
 };
 
 export const EditScreen = ({slideShow}: props) => {
-  const [images, setImages] = React.useState<slideImage[]>(slideShow.images);
+  const [images, setImages] = React.useState<slideImage[]>(slideShow.images.length > 0 ? slideShow.images : [{imageURI:"", duration: 5}]);
   const [imgIndex, setImgIndex] = React.useState<number>(0);
   return <View style={styles.wrap}>
     <Header/>
     <View style={styles.editAreaWrap}>
-      <View style={styles.sideSectionWrap}></View>
+      <View style={[styles.sideSectionWrap, imgIndex == 0 && {backgroundColor: "#0000"}]}>
+        {imgIndex > 0 && <TouchableOpacity onPress={() => setImgIndex(i => i - 1)} style={styles.previousButton}></TouchableOpacity>}
+      </View>
       <View style={styles.middleSectionWrap}></View>
-      <View style={styles.sideSectionWrap}></View>
+      <View style={styles.sideSectionWrap}>
+        {imgIndex == images.length - 1 ?
+          <TouchableOpacity onPress={() => {
+            setImages(i => [...i, {imageURI: "", duration: 5}]);
+            setImgIndex(i => i + 1);
+          }} style={styles.previousButton}></TouchableOpacity>
+          :
+          <TouchableOpacity onPress={() => setImgIndex(i => i + 1)} style={styles.previousButton}></TouchableOpacity>
+        }
+      </View>
     </View>
     <View style = {styles.fixedArea}>
       <Button title="Tallenna" onPress={() => {}}/>
@@ -45,10 +56,17 @@ const styles = StyleSheet.create({  wrap: {
     height: "60%",
     margin: 10,
     backgroundColor: "#aaa",
+    justifyContent: "center",
+    alignItems: "center",
   },
   middleSectionWrap: {
     flex: 1,
     height: "100%",
     backgroundColor: "red",
+  },
+  previousButton: {
+    height: 20,
+    width: 10,
+    backgroundColor: "blue",
   },
 });
