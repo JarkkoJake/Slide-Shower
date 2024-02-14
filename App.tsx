@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { MainMenu } from "./screens/MainMenu";
 import React from 'react';
 
