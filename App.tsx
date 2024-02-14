@@ -12,7 +12,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       { route == "MAIN" && <MainMenu slideShows= {shows} setShows={setShows} setRoute={setRoute} setActiveShow={setActiveShow}/>}
-      { route == "EDIT" && activeShow && <EditScreen slideShow={activeShow}/>}
+      { route == "EDIT" && activeShow && <EditScreen slideShow={activeShow} setShows={setShows} setRoute={setRoute}/>}
     </View>
   );
 }
