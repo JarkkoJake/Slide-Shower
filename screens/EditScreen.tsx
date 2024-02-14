@@ -1,4 +1,4 @@
-import {View, StyleSheet, Image, Button, TouchableOpacity} from "react-native";
+import {View, StyleSheet, Image, Button, TouchableOpacity, Text} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Header } from "../components/header";
@@ -33,25 +33,83 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
   return <View style={styles.wrap}>
     <Header/>
     <View style={styles.editAreaWrap}>
+
+      {/* Previous navigation area */}
       <View style={[styles.sideSectionWrap, imgIndex == 0 && {backgroundColor: "#0000"}]}>
-        {imgIndex > 0 && <TouchableOpacity onPress={() => setImgIndex(i => i - 1)} style={styles.previousButton}></TouchableOpacity>}
+        {imgIndex > 0 &&
+          <TouchableOpacity
+            onPress={() => setImgIndex(i => i - 1)}
+            style={styles.previousButton}
+          >
+            <Text style={styles.sideButtonText}>{"<"}</Text>
+          </TouchableOpacity>
+        }
       </View>
+
+      {/* Middle section, pick image and change duration */}
       <View style={styles.middleSectionWrap}>
-        <TouchableOpacity onPress={() => pickImage(images[imgIndex])} style={[styles.image, imgURI == "" && {height: 100, backgroundColor: "blue",}]}>
-          {imgURI != "" && <Image source={{uri: imgURI}} style={styles.image}/>}
-        </TouchableOpacity>
+        <View style={styles.middleContainer}>
+          <TouchableOpacity style={styles.newImageButtonWrap} onPress={() => pickImage(images[imgIndex])}>
+            {imgURI == "" ? <Text style={styles.sideButtonText}>Lisää kuva</Text> : <Image source={{uri: imgURI}} style={styles.image}/>}
+          </TouchableOpacity>
+          <View style={styles.durationWrap}>
+
+            {/* Lower duration */}
+            <TouchableOpacity
+              onPress={() => {
+                if (images[imgIndex].duration <= 1) return;
+                images[imgIndex].duration -= 1;
+                setImages(i => [...i])
+              }}
+              style={styles.changeDurationWrap}
+            >
+              <Text style={styles.sideButtonText}>-</Text>
+            </TouchableOpacity>
+
+            {/* Duration text */}
+            <View style={styles.durationTextWrap}>
+              <Text style={styles.textCenter}>{"Kuvan kesto (s)"}</Text>
+              <Text style={[styles.textCenter, {fontSize: 30}]}>{images[imgIndex].duration}</Text>
+            </View>
+
+            {/* Add duration */}
+            <TouchableOpacity
+              onPress={() => {
+                images[imgIndex].duration += 1;
+                setImages(i => [...i]);  
+              }}
+              style={styles.changeDurationWrap}
+            >
+              <Text style={styles.sideButtonText}>+</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
+
+      {/* Next / add new image section */}
       <View style={styles.sideSectionWrap}>
         {imgIndex == images.length - 1 ?
-          <TouchableOpacity onPress={() => {
-            setImages(i => [...i, {imageURI: "", duration: 5}]);
-            setImgIndex(i => i + 1);
-          }} style={styles.previousButton}></TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setImages(i => [...i, {imageURI: "", duration: 5}]);
+              setImgIndex(i => i + 1);
+            }}
+            style={styles.previousButton}
+          >
+            <Text style={styles.sideButtonText}>+</Text>
+          </TouchableOpacity>
           :
-          <TouchableOpacity onPress={() => setImgIndex(i => i + 1)} style={styles.previousButton}></TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setImgIndex(i => i + 1)}
+            style={styles.previousButton}
+          >
+            <Text style={styles.sideButtonText}>{">"}</Text>
+          </TouchableOpacity>
         }
       </View>
     </View>
+
+    {/* Bottom area, save and exit */}
     <View style = {styles.fixedArea}>
       <Button title="Tallenna ja poistu" onPress={() => {
         setShows(s => [{name: slideShow.name, images: images}, ...s.filter(sh => sh != slideShow)]);
@@ -92,14 +150,51 @@ const styles = StyleSheet.create({  wrap: {
     height: "100%",
     backgroundColor: "red",
   },
+  middleContainer: {
+    flex: 1,
+    backgroundColor: "#0005",
+    width: "100%",
+  },
+  newImageButtonWrap: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  durationWrap: {
+    height: 70,
+    width: "100%",
+    backgroundColor: "#aaa",
+    flexDirection: "row",
+  },
+  durationTextWrap: {
+    paddingVertical: 10,
+    flex: 1,
+    backgroundColor: "#bbb"
+  },
+  changeDurationWrap: {
+    width: 30,
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   previousButton: {
     height: 60,
     width: 30,
     backgroundColor: "blue",
   },
+  sideButtonText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "black",
+  },
   image: {
     width: "100%",
     height: "100%",
     resizeMode: "contain",
+  },
+  textCenter: {
+    textAlign: "center",
+    width: "100%",
   },
 });
