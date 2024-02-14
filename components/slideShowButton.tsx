@@ -3,16 +3,17 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 interface props {
   slideShow: slideShow;
   setShows: React.Dispatch<React.SetStateAction<slideShow[]>>;
+  onEdit: () => void;
 };
 
-export const SlideShowButton = ({slideShow, setShows}: props) => {
+export const SlideShowButton = ({slideShow, setShows, onEdit}: props) => {
   return <View style={styles.wrap}>
-    
+
     <TouchableOpacity onPress={() => console.log(slideShow.name)} style={styles.textContainer}>
       <Text style={styles.text}>{slideShow.name}</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => console.log("edit")} style={styles.edit}></TouchableOpacity>
+    <TouchableOpacity onPress={onEdit} style={styles.edit}></TouchableOpacity>
 
     <TouchableOpacity onPress={() => Alert.alert(
       "Varmistus",

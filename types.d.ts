@@ -7,3 +7,5 @@ interface slideShow {
   name: string;
   images: slideImage[];
 };
+
+type route = "MAIN" | "EDIT";

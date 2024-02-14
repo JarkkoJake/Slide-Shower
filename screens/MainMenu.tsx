@@ -7,9 +7,11 @@ import { SlideShowButton } from "../components/slideShowButton";
 interface props {
   slideShows: slideShow[];
   setShows: React.Dispatch<React.SetStateAction<slideShow[]>>;
+  setRoute: React.Dispatch<React.SetStateAction<route>>;
+  setActiveShow: React.Dispatch<React.SetStateAction<slideShow>>;
 };
 
-export const MainMenu: (props: props) => React.JSX.Element = ({slideShows, setShows}) => {
+export const MainMenu: (props: props) => React.JSX.Element = ({slideShows, setShows, setRoute, setActiveShow}) => {
 
   const [popupShown, showPopup] = React.useState<boolean>(false);
 
@@ -17,7 +19,10 @@ export const MainMenu: (props: props) => React.JSX.Element = ({slideShows, setSh
     <Header/>
 
     <ScrollView style= {styles.scroll}>
-      {slideShows.map(show => <SlideShowButton setShows={setShows} slideShow={show} key={show.name}/>)}
+      {slideShows.map(show => <SlideShowButton setShows={setShows} slideShow={show} key={show.name} onEdit={() => {
+        setRoute("EDIT");
+        setActiveShow(show);
+      }}/>)}
     </ScrollView>
 
     <View style = {styles.fixedArea}>
