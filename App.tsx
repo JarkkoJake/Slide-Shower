@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, BackHandler, Alert } from 'react-native';
 import { MainMenu } from "./screens/MainMenu";
 import React from 'react';
 import { EditScreen } from './screens/EditScreen';
@@ -26,6 +26,28 @@ export default function App() {
   React.useEffect(() => {
     loadShows();
   }, []);
+
+  const backButtonFunctions: {[Property in route]: () => boolean} = {
+    "EDIT": () => {
+      Alert.alert("Huomio!", "Poistutaanko tallentamatta muutoksia?", [
+        {text: "Kyllä", style: "destructive", onPress: () => setRoute("MAIN")},
+        {text: "Peruuta", style: "cancel"}
+      ]);
+      return true;
+    },
+    "MAIN": () => {
+      BackHandler.exitApp();
+      return true;
+    },
+    "PLAYBACK": () => {
+      setRoute("MAIN");
+      return true;
+    },
+  };
+
+  React.useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backButtonFunctions[route]);
+  }, [route]);
 
   return (
     <View style={styles.container}>
