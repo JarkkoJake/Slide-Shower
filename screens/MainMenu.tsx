@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Button } from "react-native";
+import { View, StyleSheet, ScrollView, Button, Alert } from "react-native";
 import React from "react";
 import { Header } from "../components/header";
 import { NewShowPopup } from "../components/newShowPopup";
@@ -20,8 +20,12 @@ export const MainMenu: (props: props) => React.JSX.Element = ({slideShows, setSh
 
     <ScrollView style= {styles.scroll}>
       {slideShows.map(show => <SlideShowButton onSelect={() => {
-        setActiveShow(show);
-        setRoute("PLAYBACK");
+        if (show.images.length > 0) {
+          setActiveShow(show);
+          setRoute("PLAYBACK");
+        } else {
+          Alert.alert("Tyhjä kuvasarja", "Tyhjää kuvasarjaa ei voida toistaa.", [{text: "OK", style: "cancel" }]);
+        }
       }} setShows={setShows} slideShow={show} key={show.name} onEdit={() => {
         setRoute("EDIT");
         setActiveShow(show);
