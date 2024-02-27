@@ -12,10 +12,13 @@ export const PlayBackScreen = ({slideShow, setRoute}: props) => {
   const [index, setIndex] = React.useState<number>(0);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    const subscribtion = setTimeout(() => {
       if (index < slideShow.images.length - 1) setIndex(i => i + 1);
       else setRoute("MAIN");
     }, slideShow.images[index].duration * 1000);
+    return () => {
+      clearTimeout(subscribtion);
+    };
   }, [index])
 
   return <View style={styles.wrap}>
