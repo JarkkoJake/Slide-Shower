@@ -23,6 +23,11 @@ export const NewShowPopup = ({visible, setShows, showPopup, slideShows}: props) 
         showPopup(false);
         setShows(s => [...s, {name: newShowName, images: []}]);
       }} disabled={slideShows.map(s => s.name).includes(newShowName) || newShowName == ""}/>
+      <View style={{height: 20}}/>
+      <Button title="Peruuta" onPress={() => {
+        showPopup(false);
+        setNewShowName("");  
+      }}/>
     </View>
   </View>
 };
