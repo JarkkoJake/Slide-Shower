@@ -16,7 +16,7 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
 
   React.useEffect(() => {
     setImgURI(images[imgIndex].imageURI);
-  }, [imgIndex])
+  }, [imgIndex, images])
 
   const pickImage = async (image: slideImage) => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -83,6 +83,10 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
               <Text style={styles.sideButtonText}>+</Text>
             </TouchableOpacity>
           </View>
+          <Button title="Poista kuva" onPress={() => {
+            setImages(imgs => imgs.filter(i => i != images[imgIndex]));
+            if (imgIndex == images.length - 1) setImgIndex(i => i-1);
+          }}/>
         </View>
       </View>
 
