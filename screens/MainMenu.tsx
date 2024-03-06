@@ -4,6 +4,7 @@ import { Header } from "../components/header";
 import { NewShowPopup } from "../components/newShowPopup";
 import { SlideShowButton } from "../components/slideShowButton";
 import { COLORS } from "../colors";
+import { AppButton } from "../components/appButton";
 
 interface props {
   slideShows: slideShow[];
@@ -34,7 +35,9 @@ export const MainMenu: (props: props) => React.JSX.Element = ({slideShows, setSh
     </ScrollView>
 
     <View style = {styles.fixedArea}>
-      <Button title="Uusi kuvasarja" onPress={() => showPopup(true)}/>
+      <View style={styles.buttonWrap}>
+      <AppButton text="Uusi kuvasarja" onPress={() => showPopup(true)}/>
+      </View>
     </View>
 
     <NewShowPopup visible={popupShown} slideShows={slideShows} setShows={setShows} showPopup={showPopup}/>
@@ -49,9 +52,12 @@ const styles = StyleSheet.create({
   fixedArea: {
     height: 100,
     paddingVertical: 20,
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.secondaryFaded,
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonWrap: {
+    width: "75%",
   },
   scroll: {
     flex: 1,

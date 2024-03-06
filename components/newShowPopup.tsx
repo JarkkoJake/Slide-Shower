@@ -1,5 +1,7 @@
 import React, { SetStateAction } from "react";
 import {View, Text, TextInput, Button, StyleSheet} from "react-native";
+import { COLORS } from "../colors";
+import { AppButton } from "./appButton";
 
 interface props {
   showPopup: React.Dispatch<SetStateAction<boolean>>;
@@ -18,16 +20,18 @@ export const NewShowPopup = ({visible, setShows, showPopup, slideShows}: props) 
     <View style={styles.popupContentContainer}>
       <Text>Kuvasarjan nimi</Text>
       <TextInput style={styles.textInput} value={newShowName} onChangeText={t => setNewShowName(t)}/>
-      <Button title="Valmis" onPress={() => {
+      <View style={{width: 200}}>
+      <AppButton text="Valmis" onPress={() => {
         setNewShowName("");
         showPopup(false);
         setShows(s => [...s, {name: newShowName, images: []}]);
       }} disabled={slideShows.map(s => s.name).includes(newShowName) || newShowName == ""}/>
       <View style={{height: 20}}/>
-      <Button title="Peruuta" onPress={() => {
+      <AppButton text="Peruuta" onPress={() => {
         showPopup(false);
         setNewShowName("");  
       }}/>
+      </View>
     </View>
   </View>
 };
@@ -41,18 +45,23 @@ const styles = StyleSheet.create({
     right: 0,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ddd"
+    backgroundColor: "#000a"
   },
   popupContentContainer: {
     padding: 20,
     alignItems: "center",
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
   },
   textInput: {
-    height: 40,
+    height: 50,
     paddingHorizontal: 10,
     marginVertical: 20,
     width: 200,
     borderWidth: 2,
-    borderColor: "#aaa"
+    borderRadius: 6,
+    borderColor: COLORS.secondary,
+    color: COLORS.accent,
+    fontSize: 30,
   },
 });
