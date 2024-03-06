@@ -2,6 +2,8 @@ import {View, StyleSheet, Image, Button, TouchableOpacity, Text, Alert} from "re
 import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Header } from "../components/header";
+import { AppButton } from "../components/appButton";
+import { COLORS } from "../colors";
 
 interface props {
   slideShow: slideShow;
@@ -41,7 +43,7 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
             onPress={() => setImgIndex(i => i - 1)}
             style={styles.previousButton}
           >
-            <Text style={styles.sideButtonText}>{"<"}</Text>
+            <Text style={[styles.sideButtonText, styles.biggerText]}>{"<"}</Text>
           </TouchableOpacity>
         }
       </View>
@@ -83,7 +85,7 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
               <Text style={styles.sideButtonText}>+</Text>
             </TouchableOpacity>
           </View>
-          <Button title="Poista kuva" onPress={() => {
+          <AppButton text="Poista kuva" onPress={() => {
             setImages(imgs => imgs.filter(i => i != images[imgIndex]));
             if (imgIndex == images.length - 1) setImgIndex(i => i-1);
           }}/>
@@ -101,7 +103,7 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
             }}
             style={styles.previousButton}
           >
-            <Text style={styles.sideButtonText}>+</Text>
+            <Text style={[styles.sideButtonText, styles.biggerText]}>+</Text>
           </TouchableOpacity>
           :
           <TouchableOpacity
@@ -116,22 +118,25 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
 
     {/* Bottom area, save and exit */}
     <View style = {styles.fixedArea}>
-      <Button title="Tallenna ja poistu" onPress={() => {
+      <View style={{width: "80%"}}>
+      <AppButton text="Tallenna ja poistu" onPress={() => {
         setShows(s => [{name: slideShow.name, images: images}, ...s.filter(sh => sh != slideShow)]);
         setRoute("MAIN");
       }}/>
+      </View>
     </View>
   </View>
 };
 
-const styles = StyleSheet.create({  wrap: {
+const styles = StyleSheet.create({
+  wrap: {
     flex: 1,
     width: "100%",
   },
   fixedArea: {
     height: 100,
     paddingVertical: 20,
-    backgroundColor:"red",
+    backgroundColor: COLORS.secondaryFaded,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -146,18 +151,17 @@ const styles = StyleSheet.create({  wrap: {
     width: "15%",
     height: "60%",
     margin: 10,
-    backgroundColor: "#aaa",
+    backgroundColor: `${COLORS.secondary}40`,
     justifyContent: "center",
     alignItems: "center",
   },
   middleSectionWrap: {
     flex: 1,
     height: "100%",
-    backgroundColor: "red",
+    backgroundColor: COLORS.secondaryFaded,
   },
   middleContainer: {
     flex: 1,
-    backgroundColor: "#0005",
     width: "100%",
   },
   newImageButtonWrap: {
@@ -169,29 +173,34 @@ const styles = StyleSheet.create({  wrap: {
   durationWrap: {
     height: 70,
     width: "100%",
-    backgroundColor: "#aaa",
     flexDirection: "row",
+    backgroundColor: COLORS.secondary,
   },
   durationTextWrap: {
     paddingVertical: 10,
     flex: 1,
-    backgroundColor: "#bbb"
   },
   changeDurationWrap: {
     width: 30,
-    height: "100%",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+    margin: 5,
   },
   previousButton: {
     height: 60,
-    width: 30,
-    backgroundColor: "blue",
+    width: 40,
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.secondary,
   },
   sideButtonText: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "black",
+    color: COLORS.accent,
   },
   image: {
     width: "100%",
@@ -200,6 +209,10 @@ const styles = StyleSheet.create({  wrap: {
   },
   textCenter: {
     textAlign: "center",
+    color: COLORS.accent,
     width: "100%",
+  },
+  biggerText: {
+    fontSize: 40,
   },
 });
