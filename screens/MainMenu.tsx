@@ -3,6 +3,7 @@ import React from "react";
 import { Header } from "../components/header";
 import { NewShowPopup } from "../components/newShowPopup";
 import { SlideShowButton } from "../components/slideShowButton";
+import { COLORS } from "../colors";
 
 interface props {
   slideShows: slideShow[];
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   fixedArea: {
     height: 100,
     paddingVertical: 20,
-    backgroundColor:"red",
+    backgroundColor: COLORS.secondary,
     justifyContent: "center",
     alignItems: "center",
   },

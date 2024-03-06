@@ -4,6 +4,7 @@ import React from 'react';
 import { EditScreen } from './screens/EditScreen';
 import { PlayBackScreen } from './screens/PlayBack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {COLORS} from "./colors";
 
 export default function App() {
 
@@ -61,7 +62,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.primary,
     alignItems: 'center',
     justifyContent: 'center',
   },
