@@ -4,6 +4,7 @@ import React from "react";
 import { Header } from "../components/header";
 import { AppButton } from "../components/appButton";
 import { COLORS } from "../colors";
+import { FooterButton } from "../components/footerButton";
 
 interface props {
   slideShow: slideShow;
@@ -117,14 +118,10 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
     </View>
 
     {/* Bottom area, save and exit */}
-    <View style = {styles.fixedArea}>
-      <View style={{width: "80%"}}>
-      <AppButton text="Tallenna ja poistu" onPress={() => {
-        setShows(s => [{name: slideShow.name, images: images}, ...s.filter(sh => sh != slideShow)]);
-        setRoute("MAIN");
-      }}/>
-      </View>
-    </View>
+    <FooterButton text="Tallenna ja poistu" onPress={() => {
+      setShows(s => [{name: slideShow.name, images: images}, ...s.filter(sh => sh != slideShow)]);
+      setRoute("MAIN");
+    }}/>
   </View>
 };
 
@@ -132,13 +129,6 @@ const styles = StyleSheet.create({
   wrap: {
     flex: 1,
     width: "100%",
-  },
-  fixedArea: {
-    height: 100,
-    paddingVertical: 20,
-    backgroundColor: COLORS.secondaryFaded,
-    justifyContent: "center",
-    alignItems: "center",
   },
   editAreaWrap: {
     flexDirection: "row",

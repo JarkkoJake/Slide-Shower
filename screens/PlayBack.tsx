@@ -1,8 +1,7 @@
-import {View, StyleSheet, Image, Button,} from "react-native";
+import {View, StyleSheet, Image} from "react-native";
 import React from "react";
 import { Header } from "../components/header";
-import { COLORS } from "../colors";
-import { AppButton } from "../components/appButton";
+import { FooterButton } from "../components/footerButton";
 
 interface props {
   slideShow: slideShow;
@@ -25,30 +24,23 @@ export const PlayBackScreen = ({slideShow, setRoute}: props) => {
 
   return <View style={styles.wrap}>
     <Header/>
+    
     <View style={styles.imageWrap}>
       <Image source={{uri: slideShow.images[index].imageURI}} style={styles.image}/>
     </View>
+
     {/* Bottom area, exit */}
-    <View style = {styles.fixedArea}>
-      <View style={{width: "80%"}}>
-      <AppButton text="Poistu" onPress={() => {
-        setRoute("MAIN");
-      }}/>
-      </View>
-    </View>
+    <FooterButton text="Poistu" onPress={() => {
+      setRoute("MAIN");
+    }}/>
+
   </View>
 };
 
-const styles = StyleSheet.create({  wrap: {
+const styles = StyleSheet.create({
+  wrap: {
     flex: 1,
     width: "100%",
-  },
-  fixedArea: {
-    height: 100,
-    paddingVertical: 20,
-    backgroundColor: COLORS.secondaryFaded,
-    justifyContent: "center",
-    alignItems: "center",
   },
   imageWrap: {
     flex: 1,
