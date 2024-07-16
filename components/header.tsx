@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 45,
     color: COLORS.accent,
+    fontWeight: "bold",
   },
   image: {
     width: 45,
