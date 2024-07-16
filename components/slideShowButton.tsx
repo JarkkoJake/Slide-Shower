@@ -16,7 +16,7 @@ export const SlideShowButton = ({slideShow, setShows, onEdit, onSelect}: props) 
 
     <View style={styles.bgEffect}/>
     <TouchableOpacity onPress={onSelect} style={styles.textContainer}>
-      <Text style={styles.text}>{slideShow.name}</Text>
+      <Text adjustsFontSizeToFit minimumFontScale={0.6} numberOfLines={2} style={styles.text}>{slideShow.name.length < 45 ? slideShow.name : `${slideShow.name.slice(0, 45)}...`}</Text>
     </TouchableOpacity>
 
     <TouchableOpacity activeOpacity={1} onPress={onEdit} style={[styles.imageBG, {marginRight: 10}]}>
