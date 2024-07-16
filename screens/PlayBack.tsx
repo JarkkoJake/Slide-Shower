@@ -14,7 +14,7 @@ export const PlayBackScreen = ({slideShow, setRoute}: props) => {
 
   React.useEffect(() => {
     const subscribtion = setTimeout(() => {
-      if (index < slideShow.images.length - 1) setIndex(i => i + 1);
+      if (index < slideShow.images.length - 1 && slideShow.images[index + 1].imageURI) setIndex(i => i + 1);
       else setRoute("MAIN");
     }, slideShow.images[index].duration * 1000);
     return () => {
