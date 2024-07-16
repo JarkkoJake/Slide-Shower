@@ -20,7 +20,7 @@ export const SlideShowButton = ({slideShow, setShows, onEdit, onSelect}: props) 
     </TouchableOpacity>
 
     <TouchableOpacity activeOpacity={1} onPress={onEdit} style={[styles.imageBG, {marginRight: 10}]}>
-      <Image source={editIcon} style={styles.icon}/>
+      <Image fadeDuration={0} source={editIcon} style={styles.icon}/>
     </TouchableOpacity>
 
     <TouchableOpacity onPress={() => Alert.alert(
@@ -30,7 +30,7 @@ export const SlideShowButton = ({slideShow, setShows, onEdit, onSelect}: props) 
         { text: "Kyllä", style: "destructive", onPress: () => {setShows(s => s.filter(s => s != slideShow))} },
         { text: "Peruuta", style: "cancel" },
       ])} style={styles.icon}>
-        <Image source={deleteIcon} style={styles.icon}/>
+        <Image fadeDuration={0} source={deleteIcon} style={styles.icon}/>
       </TouchableOpacity>
   </View>
 };

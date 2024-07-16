@@ -30,7 +30,7 @@ export const PlayBackScreen = ({slideShow, setRoute}: props) => {
     <Header/>
     
     <View style={styles.imageWrap}>
-      <Image source={{uri: slideShow.images[index].imageURI}} style={styles.image}/>
+      <Image fadeDuration={0} source={{uri: slideShow.images[index].imageURI}} style={styles.image}/>
       {slideShow.images[index].duration == 0 && <View style={styles.nextButton}>
         <AppButton
           text="Seuraava"

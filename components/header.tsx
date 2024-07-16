@@ -6,7 +6,7 @@ export const Header = () => {
   return <View style = {styles.wrap}>
   <Text style= {styles.titleText}>Slide shower</Text>
   <View style={styles.imageBG}>
-    <Image source={logo} style={styles.image}/>
+    <Image fadeDuration={0} source={logo} style={styles.image}/>
   </View>
 </View>
 };
