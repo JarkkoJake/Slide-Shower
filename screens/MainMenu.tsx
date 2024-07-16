@@ -1,10 +1,8 @@
-import { View, StyleSheet, ScrollView, Button, Alert } from "react-native";
+import { View, StyleSheet, ScrollView, Alert } from "react-native";
 import React from "react";
 import { Header } from "../components/header";
 import { NewShowPopup } from "../components/newShowPopup";
 import { SlideShowButton } from "../components/slideShowButton";
-import { COLORS } from "../colors";
-import { AppButton } from "../components/appButton";
 import { FooterButton } from "../components/footerButton";
 
 interface props {

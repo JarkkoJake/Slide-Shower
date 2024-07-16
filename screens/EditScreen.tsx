@@ -1,9 +1,8 @@
-import {View, StyleSheet, Image, Button, TouchableOpacity, Text, Alert} from "react-native";
+import {View, StyleSheet} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Header } from "../components/header";
 import { AppButton } from "../components/appButton";
-import { COLORS } from "../colors";
 import { FooterButton } from "../components/footerButton";
 import { EditPreview } from "../components/editPreview";
 import { EditBottomArea } from "../components/editBottomArea";

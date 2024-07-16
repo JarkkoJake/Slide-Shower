@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import {View, Text, TextInput, Button, StyleSheet} from "react-native";
+import {View, Text, TextInput, StyleSheet} from "react-native";
 import { COLORS } from "../colors";
 import { AppButton } from "./appButton";
 
