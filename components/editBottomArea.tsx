@@ -7,7 +7,6 @@ interface props {
   images: slideImage[];
   setImages: React.Dispatch<React.SetStateAction<slideImage[]>>;
   imageURI: string;
-  pickImage: (image: slideImage) => void;
 };
 
 export const EditBottomArea = (props: props) => {

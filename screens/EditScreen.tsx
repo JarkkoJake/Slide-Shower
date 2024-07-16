@@ -22,15 +22,25 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
     setImgURI(images[imgIndex].imageURI);
   }, [imgIndex, images])
 
-  const pickImage = async (image: slideImage) => {
+  const pickImage = async (image: slideImage, multiple: boolean) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      allowsMultipleSelection: false,
+      allowsEditing: !multiple,
+      allowsMultipleSelection: multiple,
     });
-    if (!result.canceled) {
+    if (!result.canceled && !multiple) {
       image.imageURI = result.assets[0].uri;
       setImgURI(result.assets[0].uri);
+    };
+    if (!result.canceled && multiple) {
+      image.imageURI = result.assets[0].uri;
+      setImgURI(result.assets[0].uri);
+      setImages(i => {
+        for (const pickedImage of result.assets.slice(1)) {
+          i.push({imageURI: pickedImage.uri, duration: 5});
+        }
+        return [...i];
+      })
     };
   };
 
@@ -38,7 +48,7 @@ export const EditScreen = ({slideShow, setShows, setRoute}: props) => {
     <Header/>
 
     <EditPreview imageIndex={imgIndex} imageURI={imgURI} images={images} pickImage={pickImage} setImageIndex={setImgIndex} setImages={setImages}/>
-    <EditBottomArea imageIndex={imgIndex} imageURI={imgURI} images={images} pickImage={pickImage} setImageIndex={setImgIndex} setImages={setImages}/>
+    <EditBottomArea imageIndex={imgIndex} imageURI={imgURI} images={images} setImageIndex={setImgIndex} setImages={setImages}/>
 
     <View style={styles.buttonWrap}>
       <AppButton text="Poista kuva" onPress={() => {

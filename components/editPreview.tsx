@@ -7,7 +7,7 @@ interface props {
   images: slideImage[];
   setImages: React.Dispatch<React.SetStateAction<slideImage[]>>;
   imageURI: string;
-  pickImage: (image: slideImage) => void;
+  pickImage: (image: slideImage, multiple: boolean) => void;
 };
 
 export const EditPreview = (props: props) => {
@@ -21,8 +21,12 @@ export const EditPreview = (props: props) => {
       </TouchableOpacity>}
     </View>
 
-    <TouchableOpacity style={styles.imageWrap} onPress={() => props.pickImage(props.images[props.imageIndex])}>
-      {props.imageURI == "" ? <Text style={styles.text}>Lisää kuva</Text> : <Image source={{uri: props.imageURI}} style={styles.image}/>}
+    <TouchableOpacity
+      style={styles.imageWrap}
+      onPress={() => props.pickImage(props.images[props.imageIndex], false)}
+      onLongPress={() => {if (props.imageURI == "") props.pickImage(props.images[props.imageIndex], true)}}
+    >
+      {props.imageURI == "" ? <><Text style={styles.text}>Lisää kuva</Text><Text style={[styles.text, styles.smallText]}>Paina pitkään lisätäksesi useamman kuvan kerrallaa ilman rajausta</Text></> : <Image source={{uri: props.imageURI}} style={styles.image}/>}
     </TouchableOpacity>
 
     <View style={{width: 50}}>
@@ -31,7 +35,7 @@ export const EditPreview = (props: props) => {
         onPress={() => {
           if (props.imageURI == "") Alert.alert("Tyhjä kuva", "Valitse aijempi kuva ennen uuden lisäämistä.");
           else {
-            props.setImages(i => [...i, {imageURI: "", duration: 5}]);
+            if (props.imageIndex == props.images.length - 1) props.setImages(i => [...i, {imageURI: "", duration: 5}]);
             props.setImageIndex(i => i + 1);
           }
         }}>
@@ -62,6 +66,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: COLORS.accent,
+  },
+  smallText: {
+    fontSize: 14,
+    textAlign: "center",
+    width: "80%",
   },
   arrowButtonText: {
     fontSize: 40,
