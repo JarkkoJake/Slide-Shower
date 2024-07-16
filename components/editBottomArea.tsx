@@ -15,7 +15,7 @@ export const EditBottomArea = (props: props) => {
 
   <TouchableOpacity
     onPress={() => {
-      if (props.images[props.imageIndex].duration <= 1) return;
+      if (props.images[props.imageIndex].duration < 1) return;
       props.images[props.imageIndex].duration -= 1;
       props.setImages(i => [...i])
     }}
@@ -26,7 +26,7 @@ export const EditBottomArea = (props: props) => {
 
   <View style={styles.durationTextWrap}>
     <Text style={styles.textCenter}>{"Kuvan kesto (s)"}</Text>
-    <Text style={[styles.textCenter, {fontSize: 30}]}>{props.images[props.imageIndex].duration}</Text>
+    <Text style={[styles.textCenter, {fontSize: 30}]}>{props.images[props.imageIndex].duration != 0 ? props.images[props.imageIndex].duration : "Manuaalinen"}</Text>
   </View>
 
   <TouchableOpacity
