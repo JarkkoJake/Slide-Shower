@@ -14,11 +14,12 @@ interface props {
 export const SlideShowButton = ({slideShow, setShows, onEdit, onSelect}: props) => {
   return <View style={styles.wrap}>
 
+    <View style={styles.bgEffect}/>
     <TouchableOpacity onPress={onSelect} style={styles.textContainer}>
       <Text style={styles.text}>{slideShow.name}</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={onEdit} style={styles.icon}>
+    <TouchableOpacity activeOpacity={1} onPress={onEdit} style={[styles.imageBG, {marginRight: 10}]}>
       <Image source={editIcon} style={styles.icon}/>
     </TouchableOpacity>
 
@@ -43,15 +44,30 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: COLORS.secondaryFaded,
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: COLORS.secondary,
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  bgEffect: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 30,
+    backgroundColor: COLORS.secondaryFaded,
+    opacity: 0.7,
+  },
+  imageBG: {
+    borderRadius: 100,
+    backgroundColor: COLORS.accent,
   },
   textContainer: {
     flex: 1,
   },
   text: {
     fontSize: 30,
-    color: COLORS.accentFaded,
+    color: COLORS.accent,
     fontWeight: "bold",
   },
   icon: {

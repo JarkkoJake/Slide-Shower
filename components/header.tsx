@@ -5,7 +5,9 @@ const logo = require("../assets/slideshowicon.png");
 export const Header = () => {
   return <View style = {styles.wrap}>
   <Text style= {styles.titleText}>Slide shower</Text>
-  <Image source={logo} style={styles.image}/>
+  <View style={styles.imageBG}>
+    <Image source={logo} style={styles.image}/>
+  </View>
 </View>
 };
 
@@ -26,5 +28,9 @@ const styles = StyleSheet.create({
   image: {
     width: 45,
     height: 45,
+  },
+  imageBG: {
+    borderRadius: 100,
+    backgroundColor: COLORS.accent,
   },
 });
